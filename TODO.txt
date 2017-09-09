@@ -1,0 +1,6 @@
+TODO
+
+//A function for checking the strength of password
+//A function to check passwords entered are equal or not
+//To validate url
+//Build a sample html from to display all the validations
