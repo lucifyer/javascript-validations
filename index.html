@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Testing validations</title>
+    <script src="validation.js" charset="utf-8"></script>
+</head>
+<body>
+    <form name="myform">
+        <input type="password"  id="password" onkeyup="strengthpass('password','passwordmsg')">
+        <span id="passwordmsg"></span>
+
+        <input type="password" id="confirmpass" onkeyup="confirmpassword('password','confirmpass','confirmpasswordmsg')">
+        <span id="confirmpasswordmsg"></span>
+
+        <input type="url" name="url" id="url" onkeyup="validateurl('url','urlmsg')">
+        <span id="urlmsg"></span>
+
+    </form>
+</body>
+</html>

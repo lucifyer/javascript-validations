@@ -254,13 +254,13 @@ function allowdotdashnum(inputid,messageid)
   if(!document.myform[inputid].value == "")
   {
      if(!document.myform[inputid].value.match(/^[a-zA-Z0-9\-. ]+$/))
-              {
-                  document.getElementById(messageid).style.display="block";
-                  document.getElementById(messageid).style.color="red";
-                  document.getElementById(messageid).innerHTML="No special characters!";
-                  document.getElementById(inputid).style.borderColor="red";
-                  return false;
-              }
+      {
+          document.getElementById(messageid).style.display="block";
+          document.getElementById(messageid).style.color="red";
+          document.getElementById(messageid).innerHTML="No special characters!";
+          document.getElementById(inputid).style.borderColor="red";
+          return false;
+      }
       else
       {
            document.getElementById(messageid).style.display="none";
@@ -277,6 +277,144 @@ function allowdotdashnum(inputid,messageid)
       return false;
 
   }
+}
+
+//To validate URL
+
+function validateurl(inputid,messageid)
+{
+    var regex=/https?:\/\/(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/;
+    //Without http protocol regex
+    //var regex=/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/;
+
+    if(!document.myform[inputid].value == "")
+    {
+       if(!document.myform[inputid].value.match(regex))
+        {
+            document.getElementById(messageid).style.display="block";
+            document.getElementById(messageid).style.color="red";
+            document.getElementById(messageid).innerHTML="Please enter a valid URL!";
+            document.getElementById(inputid).style.borderColor="red";
+            return false;
+        }
+        else
+        {
+             document.getElementById(messageid).style.display="none";
+             document.getElementById(inputid).style.borderColor="green";
+             return true;
+        }
+    }
+    else
+    {
+        document.getElementById(inputid).style.borderColor="red";
+        document.getElementById(messageid).style.display="block";
+        document.getElementById(messageid).style.color="red";
+        document.getElementById(messageid).innerHTML="Field can't be blank";
+        return false;
+    }
+}
+
+//To check strength of password
+
+function strengthpass(inputid,messageid)
+{
+    if(!document.myform[inputid].value == "")
+    {
+        var password=document.getElementById(inputid).value;
+        var strength = 0;
+        var valid = false;
+        // console.log(password);
+        if(password.match('[A-Z]'))
+            strength++;
+        if(password.match('[a-z]'))
+            strength++;
+        if(password.match('[0-9]'))
+            strength++;
+        if(password.match('[$\\\/@$!%*#?&]'))
+            strength++;
+        if(password.length>5)
+        {
+            strength++;
+            valid = true;
+        }
+        if(password.length>8)
+            strength++;
+        if(password.length>12)
+            strength+=2;
+        // console.log(strength);
+        if(valid)
+        {
+            switch (strength) {
+                case 2:
+                case 3:
+                case 4:     document.getElementById(inputid).style.borderColor="yellow";
+                            document.getElementById(messageid).style.display="block";
+                            document.getElementById(messageid).style.color="yellow";
+                            document.getElementById(messageid).innerHTML="Good";
+                            return true;
+                case 5:
+                case 6:
+                case 7:     document.getElementById(inputid).style.borderColor="blue";
+                            document.getElementById(messageid).style.display="block";
+                            document.getElementById(messageid).style.color="blue";
+                            document.getElementById(messageid).innerHTML="Strong";
+                            return true;
+                case 8:     document.getElementById(inputid).style.borderColor="green";
+                            document.getElementById(messageid).style.display="block";
+                            document.getElementById(messageid).style.color="green";
+                            document.getElementById(messageid).innerHTML="Excellent";
+                            return true;
+                default:
+            }
+        }
+        else {
+            document.getElementById(inputid).style.borderColor="red";
+            document.getElementById(messageid).style.display="block";
+            document.getElementById(messageid).style.color="red";
+            document.getElementById(messageid).innerHTML="Minimum 5 characters required";
+            return false;
+        }
+
+    }
+    else
+    {
+        document.getElementById(inputid).style.borderColor="red";
+        document.getElementById(messageid).style.display="block";
+        document.getElementById(messageid).style.color="red";
+        document.getElementById(messageid).innerHTML="Field can't be blank";
+        return false;
+    }
+}
+
+//To check if both the passwords entered are equal or not
+
+function confirmpassword( inputid1 , inputid2 , messageid  )
+{
+    if(!document.myform[inputid2].value == "")
+    {
+       if(document.myform[inputid1].value!=document.myform[inputid2].value)
+        {
+            document.getElementById(messageid).style.display="block";
+            document.getElementById(messageid).style.color="red";
+            document.getElementById(messageid).innerHTML="Unequal passwords";
+            document.getElementById(inputid2).style.borderColor="red";
+            return false;
+        }
+        else
+        {
+             document.getElementById(messageid).style.display="none";
+             document.getElementById(inputid2).style.borderColor="silver";
+             return true;
+        }
+    }
+    else
+    {
+        document.getElementById(inputid2).style.borderColor="red";
+        document.getElementById(messageid).style.display="block";
+        document.getElementById(messageid).style.color="red";
+        document.getElementById(messageid).innerHTML="Field can't be blank";
+        return false;
+    }
 }
 
 //To check if the field is empty for not
@@ -328,7 +466,6 @@ function allowphone(inputid,messageid)
       document.getElementById(messageid).style.color="red";
       document.getElementById(messageid).innerHTML="Field can't be blank";
       return false;
-
   }
 }
 
